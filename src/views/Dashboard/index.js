@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../../components/Post";
+import { collection, getDocs , getFirestore } from "firebase/firestore";
 
 function Dashboard(props) {
+
+  const [ads,setAds] = useState([])
+
+  const db = getFirestore()
+
+  useEffect(() => {
+    setAds([])
+    fetchRecords()
+  
+  }, [])
+
+  const fetchRecords = async () => {
+    
+    const querySnapshot = await getDocs(collection(db, "ads"));
+    querySnapshot.forEach((doc) => {
+      // console.log(doc.data())
+      // console.log(doc.data())
+      // const oldAds = [...ads];
+      setAds([...ads,doc.data()]);
+      // console.log([...ads,doc.data()])
+      // setAds(oldAds)
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+    });
+  }
+  
+
+
   return (
     <><div class="banner">
     <img
@@ -14,28 +43,25 @@ function Dashboard(props) {
       
         <h5 className="">My ADS</h5>
         <div className=" row">
-          <Post
-            image="https://demo2.drfuri.com/martfury17/wp-content/uploads/sites/58/elementor/thumbs/c1-o8k9olcyrwe8m5dunmsk1org093wzb8ajrg7wzbc4k.jpg"
-            price="21,500"
-            title="INTERIOR"
+
+        {ads && 
+          ads.map((item,key) => {
+            return (
+              <Post
+              key={key}
+            image={item.image ? item.image : "https://via.placeholder.com/170"}
+            price={item.price}
+            title={item.title}
             created_at="7 Feb 22"
             onClick={props.onClick} 
           />
+            )
+           
+          })
+          
+        }
+          
 
-          <Post
-            image="https://demo2.drfuri.com/martfury17/wp-content/uploads/sites/58/2018/08/c5.jpg"
-            price="11,500"
-            title="Procar – Evolution Seat, Driver, Vinyl"
-            created_at="8 Feb 22"
-            onClick={props.onClick} 
-          />
-          <Post
-            image="https://demo2.drfuri.com/martfury17/wp-content/uploads/sites/58/elementor/thumbs/c3-o8k9olcyrwe8m5dunmsk1org093wzb8ajrg7wzbc4k.jpg"
-            price="14,500"
-            title="Evolution Sport Drilled Brake Kit"
-            created_at="9 Feb 22"
-            onClick={props.onClick} 
-          />
         </div>
       </div>
     </>

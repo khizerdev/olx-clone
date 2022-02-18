@@ -1,5 +1,6 @@
 import React , {useState} from "react";
-import { doc, getFirestore, addDoc} from "firebase/firestore"; 
+import { doc, getFirestore } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore"; 
 function Sell() {
 
   const [category , setCategory] = useState('');
@@ -7,14 +8,22 @@ function Sell() {
   const [desc , setDesc] = useState('');
   const [price , setPrice] = useState('');
 
+
+  const db = getFirestore()
+
   const onPost = () => {
 
-    setDoc(doc(db, "users", uid), {
-      name,
-      email,
-      phone
+    addDoc(collection(db, "ads"), {
+      category,
+      title,
+      desc,
+      price
     }).then(() => {
       alert('data added successfully')
+      setCategory('')
+      setTitle('')
+      setDesc('')
+      setPrice('')
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -31,7 +40,7 @@ function Sell() {
           <div className="create_details mx-auto">
             <h3>INCLUDE SOME DETAILS</h3>
             <div className="fields">
-              <select onChange={(e) => setCategory(e.target.value)} class="form-control mb-2" name="Category">
+              <select onChange={(e) => setCategory(e.target.value)} class="form-control mb-2" name="Category" value={category}>
                 <option value="null">ALL CATEGORIES</option>
                 <option value="Cars">Cars</option>
                 <option value="Cameras &amp; Lenses">
@@ -49,6 +58,7 @@ function Sell() {
               <div className="field">
                 <label for="title">Ad Title *</label>
                 <input
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
                   required=""
                   type="text"
@@ -69,13 +79,15 @@ function Sell() {
               <div className="field-textarea">
                 <label for="">Description *</label>
                 <textarea
+               
                 onChange={(e) => setDesc(e.target.value)}
                   required=""
                   name=""
                   id=""
                   cols="30"
                   rows="4"
-                ></textarea>
+                  value={desc}
+                > {desc}</textarea>
                 <div className="p">
                   <p>Include condition, features and reason for selling</p>
                 </div>
@@ -93,6 +105,7 @@ function Sell() {
                   id="price"
                   type="text"
                   inputmode="numeric"
+                  value={price}
                 />
               </div>
             </div>
