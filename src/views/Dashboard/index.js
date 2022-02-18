@@ -17,16 +17,11 @@ function Dashboard(props) {
   const fetchRecords = async () => {
     
     const querySnapshot = await getDocs(collection(db, "ads"));
+    const docAds = [];
     querySnapshot.forEach((doc) => {
-      // console.log(doc.data())
-      // console.log(doc.data())
-      // const oldAds = [...ads];
-      setAds([...ads,doc.data()]);
-      // console.log([...ads,doc.data()])
-      // setAds(oldAds)
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
+      docAds.push(doc.data());
     });
+    setAds(docAds)
   }
   
 
