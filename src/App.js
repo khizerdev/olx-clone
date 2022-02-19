@@ -9,6 +9,7 @@ import Dashboard from './views/Dashboard';
 import Footer from './components/Footer';
 import Sell from './views/Sell';
 import Detail from './views/Detail';
+import Navigation from './config/router';
 
 function App() {
 
@@ -22,12 +23,7 @@ function App() {
   return (
     <div className="App">
       <Header onClick={changePage} />
-      {page === "Home" && <Home onClick={changePage}  />}
-      {page === "Login" && <Login onClick={changePage}  />}
-      {page === "Signup" && <Signup onClick={changePage} />}
-      {page === "Dashboard" && <Dashboard onClick={changePage} />}
-      {page === "Sell" && <Sell onClick={changePage} />}
-      {page === "Detail" && <Detail  />}
+      <Navigation/>
       <Footer/>
     </div>
   );

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { register, login } from "../../config/firebase";
+import { useNavigate } from "react-router-dom";
+
 
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  let navigate = useNavigate();
 
   const onSignin = () => {
     if (email.length == 0) {
@@ -55,7 +60,7 @@ function Login(props) {
           />
           <button onClick={onSignin}>Login</button>
         </div>
-        <a onClick={() => props.onClick("Signup")}>Signup</a>
+        <p onClick={() => navigate('/register')}>Signup</p>
       </div>
     </>
   );

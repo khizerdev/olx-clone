@@ -9,6 +9,7 @@ function Dashboard(props) {
   const db = getFirestore()
 
   useEffect(() => {
+    // var user = firebase.auth().currentUser
     setAds([])
     fetchRecords()
   
