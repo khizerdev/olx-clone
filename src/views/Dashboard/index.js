@@ -20,7 +20,7 @@ function Dashboard(props) {
     const querySnapshot = await getDocs(collection(db, "ads"));
     const docAds = [];
     querySnapshot.forEach((doc) => {
-      docAds.push(doc.data());
+      docAds.push({...doc.data() , id: doc.id});
     });
     setAds(docAds)
   }

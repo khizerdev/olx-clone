@@ -57,8 +57,8 @@ function login(email, password,props) {
     // Signed in 
     const user = userCredential.user;
     alert('Successfully Logged In')
-    console.log('user --->', user)
-    props.onClick("Dashboard")
+    // console.log('user --->', user)
+    // props.onClick("Dashboard")
     // ...
   })
   .catch((error) => {

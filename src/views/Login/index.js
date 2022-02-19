@@ -21,7 +21,7 @@ function Login(props) {
       return;
     }
     login(email, password,props);
-    
+    navigate('/dashboard')
   };
 
   return (

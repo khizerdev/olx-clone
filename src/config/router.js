@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Dashboard from "../views/Dashboard";
 import Login from "../views/Login";
 import Signup from "../views/Signup";
 
@@ -19,6 +20,7 @@ export default function Navigation() {
         <Routes>
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Signup />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
       </div>
     </Router>
