@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Post from "../../components/Post";
 import { collection, getDocs , getFirestore } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard(props) {
 
   const [ads,setAds] = useState([])
-
+  const navigate = useNavigate()
   const db = getFirestore()
 
   useEffect(() => {
@@ -49,7 +50,7 @@ function Dashboard(props) {
             price={item.price}
             title={item.title}
             created_at="7 Feb 22"
-            onClick={props.onClick} 
+            onClick={() => { navigate(`/detail/${item.id}`) }}
           />
             )
            

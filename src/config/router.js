@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Header from "../components/Header";
 import Dashboard from "../views/Dashboard";
+import Detail from "../views/Detail";
 import Home from "../views/Home";
 import Login from "../views/Login";
 import Signup from "../views/Signup";
@@ -24,6 +25,7 @@ export default function Navigation() {
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Signup />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
+            <Route path="/detail/:adId" element={<Detail />}/>
         </Routes>
       </div>
     </Router>

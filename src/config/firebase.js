@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getFirestore, setDoc} from "firebase/firestore"; 
+import { doc, getFirestore, setDoc , getDoc } from "firebase/firestore"; 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDBGaGbkUhggeRznvHcidUSfR7GmpEMavY",
@@ -59,8 +59,19 @@ async function login(email, password) {
     alert(e.message)
   }
 }
+async function getAdDetail(adId) {
+  try {
+    const docRef = doc(db, "ads", adId);
+    const docSnap = await getDoc(docRef);
+    // console.log("Document data:", docSnap.data());
+    return docSnap.data()
+  } catch (e) {
+    alert(e.message)
+  }
+}
 
 export {
   register,
-  login
+  login,
+  getAdDetail
 }
