@@ -11,17 +11,14 @@ function Login(props) {
 
   let navigate = useNavigate();
 
-  const onSignin = () => {
-    if (email.length == 0) {
-      alert("Please enter your email");
-      return;
+  const onSignin = async  () => {
+    try {
+      await login(email, password)
+      // alert('Successfully Logged in Component')
+      navigate('/dashboard')
+    } catch (e) {
+
     }
-    if (password.length == 0) {
-      alert("Please enter your password");
-      return;
-    }
-    login(email, password,props);
-    navigate('/dashboard')
   };
 
   return (

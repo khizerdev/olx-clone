@@ -50,22 +50,14 @@ function register(email, password , phone ,name) {
   });
 }
 
-function login(email, password,props) {
-  
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    alert('Successfully Logged In')
-    // console.log('user --->', user)
-    // props.onClick("Dashboard")
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage)
-  })
+async function login(email, password) {
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password)
+    alert('Successfully LoggedIn')
+    return user
+  } catch (e) {
+    alert(e.message)
+  }
 }
 
 export {
