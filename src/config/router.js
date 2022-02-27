@@ -10,6 +10,7 @@ import Dashboard from "../views/Dashboard";
 import Detail from "../views/Detail";
 import Home from "../views/Home";
 import Login from "../views/Login";
+import Sell from "../views/Sell";
 import Signup from "../views/Signup";
 
 export default function Navigation() {
@@ -24,6 +25,7 @@ export default function Navigation() {
             <Route path="/" element={<Home />}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Signup />}/>
+            <Route path="/sell" element={<Sell />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/detail/:adId" element={<Detail />}/>
         </Routes>

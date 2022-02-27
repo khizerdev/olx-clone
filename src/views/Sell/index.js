@@ -1,34 +1,41 @@
 import React , {useState} from "react";
 import { doc, getFirestore } from "firebase/firestore"; 
 import { collection, addDoc } from "firebase/firestore"; 
+import { getStorage, ref } from "firebase/storage";
+import { uploadMultipleImage } from "../../config/firebase";
 function Sell() {
 
   const [category , setCategory] = useState('');
   const [title , setTitle] = useState('');
   const [desc , setDesc] = useState('');
   const [price , setPrice] = useState('');
+  const [images , setImages] = useState([]);
 
-
+  // Create a root reference
+  const storage = getStorage();
   const db = getFirestore()
 
-  const onPost = () => {
+  const onPost = async () => {
 
-    addDoc(collection(db, "ads"), {
-      category,
-      title,
-      desc,
-      price
-    }).then(() => {
-      alert('data added successfully')
-      setCategory('')
-      setTitle('')
-      setDesc('')
-      setPrice('')
-    }).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage)
-    })
+    const response = await uploadMultipleImage(images);
+    console.log(response)
+    // addDoc(collection(db, "ads"), {
+    //   category,
+    //   title,
+    //   desc,
+    //   price,
+    //   images
+    // }).then(() => {
+    
+    //   setCategory('')
+    //   setTitle('')
+    //   setDesc('')
+    //   setPrice('')
+    // }).catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   alert(errorMessage)
+    // })
 
   }
 
@@ -114,7 +121,7 @@ function Sell() {
               <h3>UPLOAD PHOTOS</h3>
               <div className="pictures row ml-0">
                 <input
-            
+                  onChange={(e) => setImages(e.target.files)}
                   name="files[]"
                   type="file"
                   class="form-control"

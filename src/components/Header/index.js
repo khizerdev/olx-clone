@@ -120,7 +120,7 @@ function Header(props) {
           <div
             className="sellMenuContent"
             
-          > <Link to="/register"> +<span>SELL</span></Link>
+          > <Link to="/sell"> +<span>SELL</span></Link>
            
           </div>
         </div>

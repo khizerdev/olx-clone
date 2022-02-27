@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getFirestore, setDoc , getDoc } from "firebase/firestore"; 
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDBGaGbkUhggeRznvHcidUSfR7GmpEMavY",
@@ -20,6 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const auth = getAuth()
 const db = getFirestore()
+const storage = getStorage();
 
 function register(email, password , phone ,name) {
 //Asynchoronous functions
@@ -70,8 +72,23 @@ async function getAdDetail(adId) {
   }
 }
 
+async function uploadMultipleImage(files) {
+  console.log(files);
+  let urls = [];
+  for(let i=0;i < files.length;i++) {
+    console.log(files);
+    const storageRef = ref(storage, `ads/${files[i].name}`);
+    const response = await uploadBytes(storageRef , files[i])
+    const url = await getDownloadURL(response.ref)
+    urls.push(url)
+  }
+
+  return urls;
+}
+
 export {
   register,
   login,
-  getAdDetail
+  getAdDetail,
+  uploadMultipleImage
 }

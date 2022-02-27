@@ -9,6 +9,7 @@ function Detail() {
   useEffect(async  () => {
     //call firebase get function here
     const ad = await getAdDetail(params.adId)
+    console.log(ad)
     setAd(ad)
   },[])
 
