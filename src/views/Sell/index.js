@@ -3,6 +3,7 @@ import { doc, getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore"; 
 import { getStorage, ref } from "firebase/storage";
 import { uploadMultipleImage } from "../../config/firebase";
+import { useNavigate } from "react-router-dom";
 function Sell() {
 
   const [category , setCategory] = useState('');
@@ -10,6 +11,8 @@ function Sell() {
   const [desc , setDesc] = useState('');
   const [price , setPrice] = useState('');
   const [images , setImages] = useState([]);
+
+  let navigate = useNavigate();
 
   // Create a root reference
   const storage = getStorage();
@@ -19,23 +22,25 @@ function Sell() {
 
     const response = await uploadMultipleImage(images);
     console.log(response)
-    // addDoc(collection(db, "ads"), {
-    //   category,
-    //   title,
-    //   desc,
-    //   price,
-    //   images
-    // }).then(() => {
+    addDoc(collection(db, "ads"), {
+      category,
+      title,
+      desc,
+      price,
+      images : response.join()
+    }).then(() => {
     
-    //   setCategory('')
-    //   setTitle('')
-    //   setDesc('')
-    //   setPrice('')
-    // }).catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   alert(errorMessage)
-    // })
+      setCategory('')
+      setTitle('')
+      setDesc('')
+      setPrice('')
+      alert('Ad created successfully')
+      navigate('/dashboard')
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+    })
 
   }
 

@@ -20,7 +20,7 @@ function Detail() {
       <div class="viewParentDiv">
         <div class="imageShowDiv">
           <img
-            src={ad.image ? ad.image : "https://dummyimage.com/640x360/fff/aaa"}
+            src={ad.images ? ad.images : "https://dummyimage.com/640x360/fff/aaa"}
             alt=""
           />
         </div>

@@ -46,7 +46,7 @@ function Dashboard(props) {
             return (
               <Post
               key={key}
-            image={item.image ? item.image : "https://via.placeholder.com/170"}
+            image={item.images ? item.images : "https://via.placeholder.com/170"}
             price={item.price}
             title={item.title}
             created_at="7 Feb 22"
