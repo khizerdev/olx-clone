@@ -21,7 +21,6 @@ function Sell() {
   const onPost = async () => {
 
     const response = await uploadMultipleImage(images);
-    console.log(response)
     addDoc(collection(db, "ads"), {
       category,
       title,

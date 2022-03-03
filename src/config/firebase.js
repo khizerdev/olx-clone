@@ -71,6 +71,16 @@ async function getAdDetail(adId) {
     alert(e.message)
   }
 }
+async function getUser(id = "8HJUzcW9NMPQWkUSryqSYpfwEAy1") {
+  try {
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+    // console.log("Document data:", docSnap.data());
+    return docSnap.data()
+  } catch (e) {
+    alert(e.message)
+  }
+}
 
 async function uploadMultipleImage(files) {
   console.log(files);
@@ -90,5 +100,6 @@ export {
   register,
   login,
   getAdDetail,
-  uploadMultipleImage
+  uploadMultipleImage,
+  getUser
 }

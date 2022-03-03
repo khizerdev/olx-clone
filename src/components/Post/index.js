@@ -5,7 +5,7 @@ function Post(props) {
 
 
   return (
-    <div className="col mb-4" onClick={() => props.onClick("Detail")} >
+    <div className="col-md-6 mb-2" onClick={() => props.onClick("Detail")} >
       <div className="card">
         <div className="card-img-top card-img text-center">
           <img class="img-fluid" alt="" src={props.image} />
