@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { register, login } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/actions";
 
 
 function Login(props) {
@@ -10,11 +11,15 @@ function Login(props) {
   const [password, setPassword] = useState("");
 
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   const onSignin = async  () => {
     try {
-      await login(email, password)
-      // alert('Successfully Logged in Component')
+      const user = await login(email, password)
+      console.log(user)
+      alert('Successfully Logged in Component')
+      dispatch(addUser(user))
+      
       navigate('/dashboard')
     } catch (e) {
 

@@ -10,6 +10,8 @@ import Footer from './components/Footer';
 import Sell from './views/Sell';
 import Detail from './views/Detail';
 import Navigation from './config/router';
+import {Provider} from 'react-redux'
+import store from './store';
 
 function App() {
 
@@ -21,11 +23,14 @@ function App() {
   }
 
   return (
-    <div className="App">
-    
-      <Navigation/>
-      <Footer/>
-    </div>
+    <Provider store={store}>
+
+        <div className="App">
+        
+          <Navigation/>
+          <Footer/>
+        </div>
+    </Provider>
   );
 }
 

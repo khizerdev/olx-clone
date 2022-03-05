@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getFirestore, setDoc , getDoc } from "firebase/firestore"; 
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -56,7 +57,11 @@ async function login(email, password) {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password)
     alert('Successfully LoggedIn')
-    return user
+    console.log(user.user)
+    const docRef = doc(db, "users", user.user.uid);
+    const docSnap = await getDoc(docRef);
+    console.log("Document data:", docSnap.data());
+    return docSnap.data()
   } catch (e) {
     alert(e.message)
   }

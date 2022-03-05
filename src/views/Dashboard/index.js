@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getUser } from "../../config/firebase";
 import { updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { useSelector } from "react-redux";
 
 
 function Dashboard(props) {
@@ -18,6 +19,8 @@ function Dashboard(props) {
   const [phone,setPhone] = useState('')
   const [image , setImage] = useState('');
   const storage = getStorage();
+  const auth = useSelector(state => state.user)
+  console.log('from dashboard' , auth)
 
 
   useEffect(() => {
@@ -47,11 +50,12 @@ function Dashboard(props) {
 
   const updateProfile = async () => {
     
- 
+     
       const storageRef = ref(storage, `ads/${image[0].name}`);
       const responses = await uploadBytes(storageRef , image[0])
       const url = await getDownloadURL(responses.ref)
       console.log(url)
+
     // }
     // const storageRef = ref(storage, `profile/${image.name}`);
     // const responses = await uploadBytes(storageRef , image)
