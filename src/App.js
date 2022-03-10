@@ -11,7 +11,8 @@ import Sell from './views/Sell';
 import Detail from './views/Detail';
 import Navigation from './config/router';
 import {Provider} from 'react-redux'
-import store from './store';
+import {store , persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react'
 
 function App() {
 
@@ -24,12 +25,13 @@ function App() {
 
   return (
     <Provider store={store}>
-
+   <PersistGate loading={<div>Loading</div>} persistor={persistor}>
         <div className="App">
         
           <Navigation/>
           <Footer/>
         </div>
+        </PersistGate>
     </Provider>
   );
 }

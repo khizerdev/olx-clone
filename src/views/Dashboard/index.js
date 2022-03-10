@@ -22,6 +22,9 @@ function Dashboard(props) {
   const auth = useSelector(state => state.user)
   console.log('from dashboard' , auth)
 
+  const loggedInUser = useSelector(state => state.user)
+  console.log('user from Dashboard component', loggedInUser)
+
 
   useEffect(() => {
     // var user = firebase.auth().currentUser
@@ -83,6 +86,7 @@ function Dashboard(props) {
 
   return (
     <>
+      <h1 class="py-3 text-center"> Welcome {user?.name}</h1>
       <div className="banner">
         <img
           className="img-fluid"
