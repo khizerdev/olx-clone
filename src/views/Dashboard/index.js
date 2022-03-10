@@ -8,6 +8,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useSelector } from "react-redux";
 
 
+
 function Dashboard(props) {
   const [ads, setAds] = useState([]);
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Dashboard(props) {
   const [image , setImage] = useState('');
   const storage = getStorage();
   const auth = useSelector(state => state.user)
-  console.log('from dashboard' , auth)
+  // console.log('from dashboard' , auth)
 
   const loggedInUser = useSelector(state => state.user)
   console.log('user from Dashboard component', loggedInUser)

@@ -1,7 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../store/actions";
+import { useNavigate } from "react-router-dom";
 
 function Header(props) {
+
+  const auth = useSelector(state => state.user)
+  console.log('from dashboard' , auth)
+
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  const logout = () => {
+    dispatch(removeUser())
+    navigate('/')
+  }
+
   return (
     <div className="headerParentDiv container-fluid">
       <div className="headerChildDiv">
@@ -86,7 +102,8 @@ function Header(props) {
         </div>
         <div className="loginPage">
           <span>
-          <Link to="/login">Login</Link>
+          {!auth ? <Link to="/login">Login</Link> : <button onClick={logout}>Logout</button>}
+          
           </span>
           <hr />
         </div>
