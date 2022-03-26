@@ -23,7 +23,7 @@ function Dashboard(props) {
   const auth = useSelector(state => state.user)
   // console.log('from dashboard' , auth)
 
-  const loggedInUser = useSelector(state => state.user)
+  const loggedInUser = useSelector(state => state.userReducer.user)
   console.log('user from Dashboard component', loggedInUser)
 
 
@@ -87,7 +87,7 @@ function Dashboard(props) {
 
   return (
     <>
-      <h1 class="py-3 text-center"> Welcome {user?.name}</h1>
+      <h1 class="py-3 text-center"> Welcome {loggedInUser?.email}</h1>
       <div className="banner">
         <img
           className="img-fluid"
